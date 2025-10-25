@@ -9,29 +9,32 @@ function TaskForm({ onTaskCreated }) {
     e.preventDefault();
     if (!titulo || !descripcion) return;
 
-    await createTarea({ titulo, descripcion });
-    setTitulo("");
-    setDescripcion("");
-    onTaskCreated();
+    try {
+      const nuevaTarea = await createTarea({ titulo, descripcion });
+      setTitulo("");
+      setDescripcion("");
+      onTaskCreated(nuevaTarea.data); // llamamos al callback del padre
+    } catch (error) {
+      console.error("Error creando tarea:", error);
+      alert("No se pudo crear la tarea");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit}>
       <input
+        type="text"
         placeholder="Título"
         value={titulo}
         onChange={(e) => setTitulo(e.target.value)}
-        className="border p-2 mr-2"
       />
       <input
+        type="text"
         placeholder="Descripción"
         value={descripcion}
         onChange={(e) => setDescripcion(e.target.value)}
-        className="border p-2 mr-2"
       />
-      <button type="submit" className="bg-blue-500 text-white p-2">
-        Agregar
-      </button>
+      <button type="submit">Agregar Tarea</button>
     </form>
   );
 }
