@@ -9,17 +9,24 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     try {
-      await registerUser({ username, password });
-      alert("Usuario registrado ✅");
-      navigate("/login");
-    } catch {
-      alert("Error al registrar usuario");
+      const res = await registerUser({ username, password });
+      if (res.status === 200) {
+        alert("Usuario registrado ✅");
+        navigate("/login");
+      }
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.detail || "Error al registrar usuario");
+      } else {
+        alert("Error de conexión con el servidor");
+      }
     }
   };
 
   return (
-    <div>
+    <div style={{ padding: "2rem" }}>
       <h2>Registro</h2>
       <form onSubmit={handleRegister}>
         <input
