@@ -13,7 +13,7 @@ function TaskForm({ onTaskCreated }) {
       const response = await createTarea({ titulo, descripcion });
       setTitulo("");
       setDescripcion("");
-      onTaskCreated(response.data); // actualizar la lista en TaskList
+      onTaskCreated(response.data);
     } catch (error) {
       console.error("Error creando tarea:", error);
       alert("No se pudo crear la tarea");
@@ -27,12 +27,14 @@ function TaskForm({ onTaskCreated }) {
         placeholder="Título"
         value={titulo}
         onChange={(e) => setTitulo(e.target.value)}
+        required
       />
       <input
         type="text"
         placeholder="Descripción"
         value={descripcion}
         onChange={(e) => setDescripcion(e.target.value)}
+        required
       />
       <button type="submit">Agregar Tarea</button>
     </form>
