@@ -1,4 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom";
+import Main from "./Main";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import TaskList from "./components/TaskList.jsx";
