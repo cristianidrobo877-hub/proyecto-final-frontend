@@ -8,9 +8,11 @@ function TaskForm({ onTaskCreated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!titulo || !descripcion) return;
+
     await createTarea({ titulo, descripcion });
-    setTitulo(""); setDescripcion("");
-    onTaskCreated(); // refresca la lista en el padre
+    setTitulo("");
+    setDescripcion("");
+    onTaskCreated();
   };
 
   return (
@@ -19,13 +21,17 @@ function TaskForm({ onTaskCreated }) {
         placeholder="Título"
         value={titulo}
         onChange={(e) => setTitulo(e.target.value)}
+        className="border p-2 mr-2"
       />
       <input
         placeholder="Descripción"
         value={descripcion}
         onChange={(e) => setDescripcion(e.target.value)}
+        className="border p-2 mr-2"
       />
-      <button type="submit">Agregar Tarea</button>
+      <button type="submit" className="bg-blue-500 text-white p-2">
+        Agregar
+      </button>
     </form>
   );
 }
