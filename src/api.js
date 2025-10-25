@@ -1,7 +1,10 @@
+// src/api.js o donde configures Axios
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: "http://127.0.0.1:8000", // Backend FastAPI
+const API_URL = "https://proyecto-final-backend-1nh4.onrender.com";
+
+export const api = axios.create({
+  baseURL: API_URL,
 });
 
 // Tareas
