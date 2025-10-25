@@ -10,9 +10,9 @@ function Register({ onRegister }) {
     try {
       await registerUser({ username, password });
       alert("Usuario registrado ✅");
-      onRegister(username);
+      onRegister(username); // Redirige o actualiza estado en App.jsx
     } catch (error) {
-      alert("Error al registrar usuario");
+      alert(error.response?.data?.detail || "Error al registrar usuario");
     }
   };
 
@@ -32,7 +32,7 @@ function Register({ onRegister }) {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit">Registrar</button>
+      <button type="submit">Registrarse</button>
     </form>
   );
 }
