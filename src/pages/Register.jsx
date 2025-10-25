@@ -1,48 +1,39 @@
 import React, { useState } from "react";
 import { registerUser } from "../api";
-import { useNavigate } from "react-router-dom";
 
-function Register() {
+function Register({ onRegister }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await registerUser({ username, password });
-      if (res.status === 200) {
-        alert("Usuario registrado ✅");
-        navigate("/login");
-      }
+      await registerUser({ username, password });
+      alert("Usuario registrado ✅");
+      onRegister(username);
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.detail || "Error al registrar usuario");
-      } else {
-        alert("Error de conexión con el servidor");
-      }
+      alert("Error al registrar usuario");
     }
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Registro</h2>
-      <form onSubmit={handleRegister}>
-        <input
-          placeholder="Usuario"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Registrar</button>
-      </form>
-    </div>
+    <form onSubmit={handleRegister}>
+      <input
+        type="text"
+        placeholder="Usuario"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <button type="submit">Registrar</button>
+    </form>
   );
 }
 
