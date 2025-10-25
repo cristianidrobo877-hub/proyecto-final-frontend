@@ -7,21 +7,18 @@ function TaskForm({ onTaskCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!titulo || !descripcion) return;
-
     try {
-      const response = await createTarea({ titulo, descripcion });
+      const { data } = await createTarea({ titulo, descripcion });
+      onTaskCreated(data);
       setTitulo("");
       setDescripcion("");
-      onTaskCreated(response.data);
     } catch (error) {
-      console.error("Error creando tarea:", error);
-      alert("No se pudo crear la tarea");
+      alert("Error al crear tarea");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="task-form">
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Título"
@@ -36,7 +33,7 @@ function TaskForm({ onTaskCreated }) {
         onChange={(e) => setDescripcion(e.target.value)}
         required
       />
-      <button type="submit">Agregar Tarea</button>
+      <button type="submit">Crear Tarea</button>
     </form>
   );
 }
