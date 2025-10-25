@@ -1,4 +1,3 @@
-// src/api.js o donde configures Axios
 import axios from "axios";
 
 const API_URL = "https://proyecto-final-backend-1nh4.onrender.com";
