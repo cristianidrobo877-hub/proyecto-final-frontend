@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createTarea } from "../api"; // correcto
+import { createTarea } from "../api";
 
 function TaskForm({ onTaskCreated }) {
   const [titulo, setTitulo] = useState("");
@@ -10,10 +10,10 @@ function TaskForm({ onTaskCreated }) {
     if (!titulo || !descripcion) return;
 
     try {
-      const nuevaTarea = await createTarea({ titulo, descripcion });
+      const response = await createTarea({ titulo, descripcion });
       setTitulo("");
       setDescripcion("");
-      onTaskCreated(nuevaTarea.data); // llamamos al callback del padre
+      onTaskCreated(response.data); // actualizar la lista en TaskList
     } catch (error) {
       console.error("Error creando tarea:", error);
       alert("No se pudo crear la tarea");
@@ -21,7 +21,7 @@ function TaskForm({ onTaskCreated }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="task-form">
       <input
         type="text"
         placeholder="Título"
