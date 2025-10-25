@@ -1,33 +1,27 @@
 import React, { useState } from "react";
-import TaskList from "./components/TaskList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [showRegister, setShowRegister] = useState(false);
 
   if (!user) {
-    return showRegister ? (
-      <Register
-        onRegister={(username) => {
-          setUser(username);
-          setShowRegister(false);
-        }}
-      />
-    ) : (
-      <Login
-        onLogin={(username) => {
-          setUser(username);
-        }}
-      />
+    return (
+      <div>
+        <h2>Registro</h2>
+        <Register onRegister={setUser} />
+        <h2>Login</h2>
+        <Login onLogin={setUser} />
+      </div>
     );
   }
 
   return (
     <div>
-      <h1>Bienvenido, {user}</h1>
-      <button onClick={() => setUser(null)}>Logout</button>
+      <h2>Bienvenido, {user}</h2>
+      <TaskForm onTaskCreated={() => {}} />
       <TaskList />
     </div>
   );
