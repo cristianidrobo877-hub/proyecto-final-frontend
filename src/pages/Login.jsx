@@ -9,9 +9,10 @@ function Login({ onLogin }) {
     e.preventDefault();
     try {
       await loginUser({ username, password });
-      onLogin(username);
+      alert("Login exitoso ✅");
+      onLogin(username); // Redirige o actualiza estado en App.jsx
     } catch (error) {
-      alert("Credenciales incorrectas");
+      alert(error.response?.data?.detail || "Credenciales incorrectas");
     }
   };
 
