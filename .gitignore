@@ -1,9 +1,0 @@
-# Ignorar dependencias y archivos de compilación
-node_modules/
-dist/
-.vite/
-.env
-.env.local
-.idea/
-.vscode/
-*.log
